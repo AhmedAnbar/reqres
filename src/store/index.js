@@ -1,9 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from 'vuex-persist'
+import user from './user'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+})
+
+const store = new Vuex.Store({
   state: {
   },
   mutations: {
@@ -11,5 +17,9 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-  }
+    user
+  },
+  plugins: [vuexLocal.plugin]
 })
+
+export default store
